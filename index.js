@@ -29,7 +29,7 @@ async function run (){
 
     }
 }
-run().catch{console.dir}
+run().catch(console.dir)
 
 
 app.get ('/', (req,res)=>{
