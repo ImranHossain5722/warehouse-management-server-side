@@ -31,7 +31,10 @@ app.get ('/', (req,res)=>{
 })
 
 
+app.get('/hero',(req,res)=>{
 
+    res.send('heroku check ')
+})
 
 
 
