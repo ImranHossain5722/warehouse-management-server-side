@@ -40,7 +40,7 @@ async function run() {
         const id = req.params.id
         const query= {_id: ObjectId (id)}
         const inventoryItem = await inventoryItemsCollection.findOne(query)
-        res.send(inventoryItem)
+        res.send(inventoryIte)
     })
 
 
