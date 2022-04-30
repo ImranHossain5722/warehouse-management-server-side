@@ -35,10 +35,10 @@ async function run() {
       res.send(inventoryItems)
     });
 
-    app.get('/manageitem/:id',async(req,res)=>{
+    app.get('/manageitem/inventoryItemId',async(req,res)=>{
 
         const id =req.params.id
-        const query= {_id: ObjectId(id)}
+        const query= {_id:ObjectId(id)}
         const inventoryItem =await inventoryItemsCollection.findOne(query)
         res.send(inventoryItem)
     })
