@@ -61,7 +61,7 @@ async function run() {
       const result = await inventoryItemsCollection.deleteOne(query);
       res.send(result)
 
-    })
+    });
 
 
   } finally {
