@@ -64,14 +64,14 @@ async function run() {
       const updateItemFieldsDoc = {
 
         $set:{
-          quantity: updateItem.quantity,
+          quantity:updateItem.quantity ,
           price: updateItem.price,
-          img: updateItem.img
+          
         }
       }
 
       const result = await inventoryItemsCollection.updateOne(filter, updateItemFieldsDoc, options)
-      
+
       res.send(result)
 
 
