@@ -46,11 +46,24 @@ async function run() {
 
     //post
     app.post('/inventoryItems', async (req, res)=>{
-      const email =req.query.email ;
+
       const newItem =req.body;
       const result = await inventoryItemsCollection.insertOne(newItem)
       res.send(result);
     })
+
+    // stock items collections
+    app.get('/inventoryItems'), async (req, res )=>{
+      const email = req.query.email;
+      const query ={email:email}
+      const cursor = inventoryItemsCollection.find(query)
+      const  stockItem = await cursor.toArray();
+      res.send(stockItem)
+
+
+    }
+
+
 
     // Update Inventory items 
     app.put('/inventoryItems/:id', async (req, res) =>{
@@ -87,17 +100,7 @@ async function run() {
     });
 
 
-    // stock items collection 
 
-    app.get('/inventoryItems'), async (req, res )=>{
-      const email = req.query.email;
-      const query = {email:email}
-      const cursor = inventoryItemsCollection.find(query)
-      const  stockItem = await cursor.toArray();
-      res.send(stockItem)
-
-
-    }
 
 
   } finally {
