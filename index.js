@@ -40,6 +40,17 @@ async function run() {
         res.send(inventoryItem)
     })
 
+
+
+    // stock items collections
+    app.get('/inventoryItems'), async (req, res )=>{
+      const email = req.query.email;
+      const query ={email:email}
+      const cursor = inventoryItemsCollection.find(query)
+      const  stockItem = await cursor.toArray()
+      res.send(stockItem)
+
+    }
     //post
     app.post('/inventoryItems', async (req, res)=>{
 
@@ -48,25 +59,7 @@ async function run() {
       res.send(result);
     })
 
-
-    // for my item 
-    app.post('/inventoryItem', async (req, res)=>{
-
-      const newStock =req.body;
-      const result = await inventoryItemsCollection.insertOne(newStock)
-      res.send(result);
-    })
-
-    // stock items collections
-    app.get('/inventoryItem'), async (req, res )=>{
-      const email = req.query.email;
-      const query ={email:email}
-      const cursor = inventoryItemsCollection.find(query)
-      const  stockItem = await cursor.toArray()
-      res.send(stockItem)
-
-
-    }
+    
 
 
 
