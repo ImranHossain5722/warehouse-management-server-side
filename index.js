@@ -106,7 +106,7 @@ async function run() {
     })
 
 
-    //blogs
+    //All blogs
     app.get('/blogs', async(req,res)=>{
 
       const query ={}
@@ -114,6 +114,16 @@ async function run() {
       const blogs= await cursor.toArray();
       res.send(blogs)
     })
+
+    // for 1 single blog
+    app.get('/blogs/:id', async(req,res)=>{
+      const id =req.params.id
+      const query ={_id: ObjectId(id)}
+      const blog = await blogsCollection.findOne(query)
+      res.send(blog)
+    })
+
+
    
 
   } finally {
