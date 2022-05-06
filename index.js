@@ -52,7 +52,7 @@ async function run() {
 
 
     // for my item 
-    app.post('/myitem', async (req, res)=>{
+    app.post('/inventoryItems', async (req, res)=>{
 
       const newStock =req.body;
       const result = await stockItemCollection.insertOne(newStock)
@@ -60,11 +60,11 @@ async function run() {
     })
 
     // stock items collections
-    app.get('/myitem'), async (req, res )=>{
+    app.get('/inventoryItems'), async (req, res )=>{
       const email = req.query.email;
       const query ={email:email}
       const cursor = stockItemCollection.find(query)
-      const  stockItem = await cursor.toArray();
+      const  stockItem = await cursor.toArray()
       res.send(stockItem)
 
 
