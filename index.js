@@ -9,9 +9,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 app.use(cors());
 app.use(express.json());
 
-// user name: carSaleUser password: dTHGlX2ejwjbzWUP
 
-// mongodb database
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.bvvu1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
@@ -52,18 +50,18 @@ async function run() {
 
 
     // for my item 
-    app.post('/inventoryItems', async (req, res)=>{
+    app.post('/inventoryItem', async (req, res)=>{
 
       const newStock =req.body;
-      const result = await stockItemCollection.insertOne(newStock)
+      const result = await inventoryItemsCollection.insertOne(newStock)
       res.send(result);
     })
 
     // stock items collections
-    app.get('/inventoryItems'), async (req, res )=>{
+    app.get('/inventoryItem'), async (req, res )=>{
       const email = req.query.email;
       const query ={email:email}
-      const cursor = stockItemCollection.find(query)
+      const cursor = inventoryItemsCollection.find(query)
       const  stockItem = await cursor.toArray()
       res.send(stockItem)
 
