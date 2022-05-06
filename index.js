@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const jwt = require('jsonwebtoken');
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 const app = express();
@@ -39,10 +40,18 @@ async function run() {
       const result = await inventoryItemsCollection.insertOne(newItem)
       res.send(result);
     })
+ 
+    // data load
+    app.get('/inventoryItems', async (req, res) => {
+      const query = {};
+      const cursor = inventoryItemsCollection.find(query);
+      const inventoryItems = await cursor.toArray();
+      res.send(inventoryItems)
+    });
 
     // stock items collections
     app.get('/inventoryItems'), async (req, res )=>{
-      const email = req.query.email;
+      const email = req.query.email ;
       const query ={email:email}
       const cursor = inventoryItemsCollection.find(query)
       const  stockItem = await cursor.toArray()
@@ -50,14 +59,7 @@ async function run() {
 
     }
 
-     
-    // data load
-    app.get("/inventoryItems", async (req, res) => {
-      const query = {};
-      const cursor = inventoryItemsCollection.find(query);
-      const inventoryItems = await cursor.toArray();
-      res.send(inventoryItems)
-    });
+    
     
 
 
@@ -96,7 +98,15 @@ async function run() {
 
     });
 
+    //Auth
+    app.post('/login', async (req,res)=>{
+      const user =req.body
+      const accessToken= jwt.sign (user,process.env.ACCESS_TOKEN_SEC, {
 
+        expiresIn: '1d'
+      });
+      res.send(accessToken);
+    })
 
 
 
@@ -107,10 +117,6 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("assignment project is running");
-});
-
-app.get("/hero", (req, res) => {
-  res.send("heroku check ");
 });
 
 app.listen(port, () => {
