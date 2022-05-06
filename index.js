@@ -118,7 +118,7 @@ async function run() {
     // for 1 single blog
     app.get('/blogs/:id', async(req,res)=>{
       const id =req.params.id
-      const query ={_id: ObjectId(id)}
+      const query ={_id:ObjectId(id)}
       const blog = await blogsCollection.findOne(query)
       res.send(blog)
     })
@@ -128,7 +128,7 @@ async function run() {
 
   } finally {
 
-    
+
   }
 }
 run().catch(console.dir);
