@@ -117,6 +117,10 @@ app.get("/", (req, res) => {
   res.send("assignment project is running");
 });
 
+app.get("/hero", (req, res) => {
+  res.send("assignment project is running");
+});
+
 app.listen(port, () => {
   console.log("assignmetn server work to port ", port);
 })
