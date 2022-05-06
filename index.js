@@ -21,8 +21,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    const inventoryItemsCollection = client .db("car-sale").collection("inventory-items");
-    const stockItemCollection= client .db("car-sale").collection("stock-items");
+    const inventoryItemsCollection = client .db("car-sale").collection("inventory-items")
     
     // data load
       app.get("/inventoryItems", async (req, res) => {
@@ -40,7 +39,13 @@ async function run() {
         res.send(inventoryItem)
     })
 
+    //post
+    app.post('/inventoryItems', async (req, res)=>{
 
+      const newItem =req.body;
+      const result = await inventoryItemsCollection.insertOne(newItem)
+      res.send(result);
+    })
 
     // stock items collections
     app.get('/inventoryItems'), async (req, res )=>{
@@ -51,14 +56,6 @@ async function run() {
       res.send(stockItem)
 
     }
-    //post
-    app.post('/inventoryItems', async (req, res)=>{
-
-      const newItem =req.body;
-      const result = await inventoryItemsCollection.insertOne(newItem)
-      res.send(result);
-    })
-
     
 
 
