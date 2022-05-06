@@ -51,13 +51,13 @@ async function run() {
     }
 
      
-    // // data load
-    // app.get("/inventoryItems", async (req, res) => {
-    //   const query = {};
-    //   const cursor = inventoryItemsCollection.find(query);
-    //   const inventoryItems = await cursor.toArray();
-    //   res.send(inventoryItems)
-    // });
+    // data load
+    app.get("/inventoryItems", async (req, res) => {
+      const query = {};
+      const cursor = inventoryItemsCollection.find(query);
+      const inventoryItems = await cursor.toArray();
+      res.send(inventoryItems)
+    });
     
 
 
