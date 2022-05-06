@@ -21,6 +21,7 @@ async function run() {
   try {
     await client.connect();
     const inventoryItemsCollection = client .db("car-sale").collection("inventory-items")
+    const blogsCollection =client.db("car-sale").collection("blogs")
    
 
     app.get('/inventoryItems/:id', async(req,res)=>{
@@ -105,6 +106,15 @@ async function run() {
     })
 
 
+    //blogs
+    app.get('/blogs', async(req,res)=>{
+
+      const query ={}
+      const cursor=blogsCollection.find(query)
+      const blogs= await cursor.toArray();
+      res.send(blogs)
+    })
+   
 
   } finally {
   }
