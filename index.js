@@ -22,14 +22,7 @@ async function run() {
   try {
     await client.connect();
     const inventoryItemsCollection = client .db("car-sale").collection("inventory-items")
-    
-    // data load
-      app.get("/inventoryItems", async (req, res) => {
-      const query = {};
-      const cursor = inventoryItemsCollection.find(query);
-      const inventoryItems = await cursor.toArray();
-      res.send(inventoryItems)
-    });
+   
 
     app.get('/inventoryItems/:id', async(req,res)=>{
 
@@ -56,6 +49,15 @@ async function run() {
       res.send(stockItem)
 
     }
+
+     
+    // // data load
+    // app.get("/inventoryItems", async (req, res) => {
+    //   const query = {};
+    //   const cursor = inventoryItemsCollection.find(query);
+    //   const inventoryItems = await cursor.toArray();
+    //   res.send(inventoryItems)
+    // });
     
 
 
