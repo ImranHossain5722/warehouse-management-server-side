@@ -122,7 +122,16 @@ async function run() {
       const blog = await blogsCollection.findOne(query)
       res.send(blog)
     })
+    
 
+    /// for pagination
+    app.get('/inventoryImtesCount', async(req,res)=>{
+
+        const query= {}
+        const cursor =inventoryItemsCollection.find(query)
+        const count = await cursor.count()
+        res.send({count})
+    }) 
 
    
 
