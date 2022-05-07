@@ -44,7 +44,7 @@ async function run() {
     app.get('/inventoryItems', async (req, res) => {
       const query = {};
       const cursor = inventoryItemsCollection.find(query);
-      const inventoryItems = await cursor.limit(6).toArray();
+      const inventoryItems = await cursor.toArray();
       res.send(inventoryItems)
     });
 
