@@ -42,12 +42,15 @@ async function run() {
       
       const page= parseInt(req.query.page);
       const size =  parseInt(req.query.size);
+      const email = req.query.email
       const query = {};
       const cursor = inventoryItemsCollection.find(query);
       let inventoryItems ;
       if( page || size ){
 
         inventoryItems = await cursor.skip(page*size).limit(size).toArray();
+        inventoryItems = await cursor.find(email).toArray();
+        
       }else{
 
         inventoryItems = await cursor.toArray();
@@ -56,13 +59,13 @@ async function run() {
     });
 
     // stock items collections
-    app.get("/myItems"),async (req, res) => {
-        const email = req.query.email
-        const query = {email: email};
-        const cursor = inventoryItemsCollection.find(query);
-        const stockItem = await cursor.toArray();
-        res.send(stockItem);
-      };
+    // app.get("/inventoryItems"),async (req, res) => {
+    //     const email = req.query.email
+    //     const query = {email: email};
+    //     const cursor = inventoryItemsCollection.find(query);
+    //     const stockItem = await cursor.toArray();
+    //     res.send(stockItem);
+    //   };
 
     // Update Inventory items
     app.put("/inventoryItems/:id", async (req, res) => {
