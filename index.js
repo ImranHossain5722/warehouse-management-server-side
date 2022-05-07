@@ -122,10 +122,10 @@ async function run() {
 
     /// for pagination
     app.get("/inventoryImtesCount", async (req, res) => {
-      const query = {};
-      const cursor = inventoryItemsCollection.find(query);
-      const count = await cursor.count();
+    
+      const count = await inventoryItemsCollection.estimatedDocumentCount();
       res.send({ count });
+      
     });
   } finally {
   }
