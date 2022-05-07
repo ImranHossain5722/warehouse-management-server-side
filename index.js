@@ -56,9 +56,8 @@ async function run() {
     });
 
     // stock items collections
-    app.get("/inventoryItems"),async (req, res) => {
+    app.get("/myItems"),async (req, res) => {
         const email = req.query.email;
-        console.log(email)
         const query = { email: email };
         const cursor = inventoryItemsCollection.find(query);
         const stockItem = await cursor.toArray();
@@ -136,6 +135,9 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("assignment project is running");
+});
+app.get("/heroku", (req, res) => {
+  res.send("HEROKU SERVER");
 });
 
 
