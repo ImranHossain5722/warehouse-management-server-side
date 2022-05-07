@@ -43,9 +43,8 @@ async function run() {
       const page= parseInt(req.query.page);
       const size =  parseInt(req.query.size);
       const email = req.query.email
-      const query1 = {email: email}; 
       const query = {}; 
-      const cursor = inventoryItemsCollection.find(query,query1);  
+      const cursor = inventoryItemsCollection.find(query);    
       let inventoryItems ;
       if( page || size ){
 
