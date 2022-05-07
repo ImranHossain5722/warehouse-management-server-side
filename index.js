@@ -39,9 +39,11 @@ async function run() {
 
     // data load
     app.get("/inventoryItems", async (req, res) => {
+      const email = req.query.email;
+        console.log(email)
       const page= parseInt(req.query.page);
       const size =  parseInt(req.query.size);
-      const query = {};
+      const query = {email: email};
       const cursor = inventoryItemsCollection.find(query);
       let inventoryItems ;
       if( page || size ){
@@ -55,13 +57,14 @@ async function run() {
     });
 
     // stock items collections
-    app.get("/inventoryItems"),async (req, res) => {
-        const email = req.query.email;
-        const query = { email: email };
-        const cursor = inventoryItemsCollection.find(query);
-        const stockItem = await cursor.toArray();
-        res.send(stockItem);
-      };
+    // app.get("/inventoryItems"),async (req, res) => {
+    //     const email = req.query.email;
+    //     console.log(email)
+    //     // const query = { email: email };
+    //     const cursor = inventoryItemsCollection.find(query);
+    //     const stockItem = await cursor.toArray();
+    //     res.send(stockItem);
+    //   };
 
     // Update Inventory items
     app.put("/inventoryItems/:id", async (req, res) => {
@@ -125,7 +128,7 @@ async function run() {
     
       const count = await inventoryItemsCollection.estimatedDocumentCount();
       res.send({ count });
-      
+
     });
   } finally {
   }
@@ -136,9 +139,7 @@ app.get("/", (req, res) => {
   res.send("assignment project is running");
 });
 
-app.get("/hero", (req, res) => {
-  res.send("assignment project is running");
-});
+
 
 app.listen(port, () => {
   console.log("assignmetn server work to port ", port);
