@@ -43,13 +43,14 @@ async function run() {
       const page= parseInt(req.query.page);
       const size =  parseInt(req.query.size);
       const email = req.query.email
-      const query = {};
-      const cursor = inventoryItemsCollection.find(query);
+      const query1 = {email: email}; 
+      const query = {}; 
+      const cursor = inventoryItemsCollection.find(query,query1);  
       let inventoryItems ;
       if( page || size ){
 
         inventoryItems = await cursor.skip(page*size).limit(size).toArray();
-        inventoryItems = await cursor.find(email).toArray();
+        
         
       }else{
 
