@@ -144,5 +144,5 @@ app.get("/", (req, res) => {
 
 
 app.listen(port, () => {
-  console.log("assignmetn server work to port ", port);
+  console.log("server work to port ", port);
 });
